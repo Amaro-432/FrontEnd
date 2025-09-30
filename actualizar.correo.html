@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo-correo</title>
+</head>
+
+<body>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Actualizar Correo Electrónico</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form class="card p-4 shadow-sm">
+                    <h5 class="mb-3">Modificar perfil</h5>
+                    <div class="mb-3">
+                        <label for="correoActual" class="form-label">Correo actual:</label>
+                        <input type="email" class="form-control" id="correoActual" value="cliente.antiguo@correo.cl" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nuevoCorreo" class="form-label">Nuevo correo:</label>
+                        <input type="email" class="form-control" id="nuevoCorreo" placeholder="cliente.nuevo@correo.cl" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmarCorreo" class="form-label">Confirmar nuevo correo:</label>
+                        <input type="email" class="form-control" id="confirmarCorreo"
+                            placeholder="Repite el nuevo correo" required>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
