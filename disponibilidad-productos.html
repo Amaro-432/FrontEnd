@@ -213,44 +213,7 @@
                     </div>
                 </div>
 
-                <!-- modal de disponibilidad -->
 
-                <div class="modal fade" id="disponibilidad" tabindex="-1" aria-labelledby="disponibilidadLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header bg-primary text-white">
-                                <h5 class="modal-title" id="disponibilidadLabel">Actualización de disponibilidad</h5>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                    aria-label="Cerrar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <p><strong>Producto:</strong> Queso Mantecoso</p>
-                                        <p><strong>Stock:</strong> 0</p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label"><strong>Disponibilidad:</strong></label><br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="disponibilidad"
-                                                id="disponible" value="true">
-                                            <label class="form-check-label" for="disponible">Disponible</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="disponibilidad"
-                                                id="noDisponible" value="false" checked>
-                                            <label class="form-check-label" for="noDisponible">No disponible</label>
-                                        </div>
-                                    </div>
-                                    <div class="d-grid">
-                                        <button class="btn btn-primary w-100">Actualizar disponibilidad</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- modal de información -->
 
@@ -322,6 +285,9 @@
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="modal fade" id="nuevoProducto" tabindex="-1" aria-labelledby="nuevoProductoLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
@@ -394,11 +360,111 @@
         </div>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // -------- MODAL: ACTUALIZAR PRODUCTO (#info) --------
+            const modalInfo = document.getElementById("info");
+            if (modalInfo) {
+                const btnGuardarInfo = modalInfo.querySelector(".btn.btn-primary");
+                const inputProductoInfo = modalInfo.querySelector("#producto");
+                const inputDescripcionInfo = modalInfo.querySelector("#descripcion");
+                const inputPrecioInfo = modalInfo.querySelector("#precio");
+                const selectCategoriaInfo = modalInfo.querySelector("#categoria");
+
+                btnGuardarInfo.addEventListener("click", function (event) {
+                    event.preventDefault();
+
+                    if (
+                        inputProductoInfo.value.trim() === "" ||
+                        inputDescripcionInfo.value.trim() === "" ||
+                        inputPrecioInfo.value.trim() === "" ||
+                        selectCategoriaInfo.value.trim() === ""
+                    ) {
+                        mostrarMensaje("Debe completar todos los campos obligatorios.");
+                        return;
+                    }
+
+                    mostrarMensaje("El catálogo muestra el precio actualizado para los clientes.");
+                });
+            }
+
+            // -------- MODAL: NUEVO PRODUCTO (#nuevoProducto) --------
+            const modalNuevo = document.getElementById("nuevoProducto");
+            if (modalNuevo) {
+                const btnGuardarNuevo = modalNuevo.querySelector(".btn.btn-primary");
+                const inputProductoNuevo = modalNuevo.querySelector("#producto");
+                const inputDescripcionNuevo = modalNuevo.querySelector("#descripcion");
+                const inputPrecioNuevo = modalNuevo.querySelector("#precio");
+                const selectCategoriaNuevo = modalNuevo.querySelector("#categoria");
+
+                btnGuardarNuevo.addEventListener("click", function (event) {
+                    event.preventDefault();
+
+                    if (
+                        inputProductoNuevo.value.trim() === "" ||
+                        inputDescripcionNuevo.value.trim() === "" ||
+                        inputPrecioNuevo.value.trim() === "" ||
+                        selectCategoriaNuevo.value.trim() === ""
+                    ) {
+                        mostrarMensaje("Debe completar todos los campos obligatorios.");
+                        return;
+                    }
+
+                    mostrarMensaje("El nuevo producto fue agregado correctamente al catálogo.");
+                });
+            }
+
+            // -------- FUNCIÓN PARA MOSTRAR MENSAJES --------
+            function mostrarMensaje(texto) {
+                const modal = document.createElement("div");
+                modal.classList.add("modal", "fade", "show");
+                modal.style.display = "block";
+                modal.style.backgroundColor = "rgba(0,0,0,0.5)";
+                modal.innerHTML = `
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Catálogo</h5>
+                        <button type="button" class="btn-close" id="cerrarModal"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>${texto}</p>
+                        <button class="btn btn-primary mt-2" id="okBtn">OK</button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                document.body.appendChild(modal);
+
+                const cerrar = () => {
+                    modal.classList.remove("show");
+                    modal.remove();
+                };
+
+                document.getElementById("cerrarModal").addEventListener("click", cerrar);
+                document.getElementById("okBtn").addEventListener("click", cerrar);
+            }
+        });
+    </script>
+
+    <script>
         fetch("navbar.html")
             .then(res => res.text())
             .then(data => {
                 document.getElementById("navbar").innerHTML = data;
+                actualizarContadorCarrito();
             });
+
+        function actualizarContadorCarrito() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const totalProductos = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+            const badge = document.querySelector(".navbar .badge.bg-danger");
+            if (badge) {
+                badge.textContent = totalProductos;
+                badge.style.display = totalProductos > 0 ? "inline-block" : "none";
+            }
+        }
     </script>
 </body>
 <footer class="bg-black text-white mt-0">

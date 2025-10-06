@@ -118,35 +118,210 @@
       </div>
     </div>
   </div>
-  <div class="modal fade" id="errorPagoModal" tabindex="-1" aria-labelledby="errorPagoLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content border-danger">
-        <div class="modal-header bg-danger text-white">
-          <h5 class="modal-title" id="errorPagoLabel">❌ Pago</h5>
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body text-center">
-          <p class="fs-5">El pago no se pudo procesar.</p>
-          <p>
-            Por favor verifica los datos de tu tarjeta o intenta nuevamente
-            más tarde.
-          </p>
-        </div>
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
-            OK
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabla = document.querySelector("table");
+
+      // Eliminar producto
+      tabla.addEventListener("click", function (event) {
+        if (event.target.classList.contains("btn-outline-danger")) {
+          const fila = event.target.closest("tr");
+          fila.remove();
+          actualizarTotal();
+        }
+      });
+
+      // Actualizar subtotal al cambiar cantidad
+      tabla.addEventListener("input", function (event) {
+        if (event.target.matches("input[type='number']")) {
+          const fila = event.target.closest("tr");
+          const precioTexto = fila.querySelector("td:nth-child(2)").textContent;
+          const precio = parseInt(precioTexto.replace(/\D/g, ""));
+          const cantidad = parseInt(event.target.value) || 1;
+          const nuevoSubtotal = precio * cantidad;
+
+          fila.querySelector("td:nth-child(4)").textContent = `$${nuevoSubtotal.toLocaleString("es-CL")}`;
+          actualizarTotal();
+        }
+      });
+
+      // Recalcular total
+      function actualizarTotal() {
+        const filas = tabla.querySelectorAll("tbody tr");
+        let total = 0;
+
+        filas.forEach(fila => {
+          const subtotalTexto = fila.querySelector("td:nth-child(4)").textContent;
+          const subtotal = parseInt(subtotalTexto.replace(/\D/g, ""));
+          total += subtotal;
+        });
+
+        const totalCelda = tabla.querySelector("tfoot td.fw-bold:last-child");
+        totalCelda.textContent = `$${total.toLocaleString("es-CL")}`;
+      }
+    });
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabla = document.querySelector("table");
+      const modal = document.getElementById("confirmarPedidoModal");
+
+      modal.addEventListener("show.bs.modal", function (event) {
+        const filasCarrito = tabla.querySelectorAll("tbody tr");
+
+        if (filasCarrito.length === 0) {
+          event.preventDefault(); // ❌ Impide que el modal se abra
+          mostrarAlerta("Debe agregar al menos un producto para confirmar pedido");
+        }
+      });
+
+      function mostrarAlerta(mensaje) {
+        const contenedor = document.querySelector(".container-fluid.my-5.px-5");
+        let alerta = contenedor.querySelector(".alert");
+
+        if (alerta) alerta.remove();
+
+        alerta = document.createElement("div");
+        alerta.className = "alert alert-warning mt-3";
+        alerta.textContent = mensaje;
+
+        contenedor.insertBefore(alerta, contenedor.querySelector(".table-responsive"));
+
+        setTimeout(() => alerta.remove(), 4000);
+      }
+    });
+
+
+
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const tbody = document.querySelector("table tbody");
+
+      // Limpiar contenido estático
+      tbody.innerHTML = "";
+
+      carrito.forEach(producto => {
+        const fila = document.createElement("tr");
+        fila.innerHTML = `
+        <td>${producto.nombre}</td>
+        <td>$${producto.precio.toLocaleString("es-CL")}</td>
+        <td>
+          <input type="number" class="form-control form-control-sm w-50" value="${producto.cantidad}" min="1" />
+        </td>
+        <td>$${producto.subtotal.toLocaleString("es-CL")}</td>
+        <td>
+          <button class="btn btn-sm btn-outline-danger">Cancelar</button>
+        </td>
+      `;
+        tbody.appendChild(fila);
+      });
+
+      actualizarTotal(); // Recalcular total inicial
+
+      // Actualizar subtotal y total al cambiar cantidad
+      tbody.addEventListener("input", function (event) {
+        if (event.target.matches("input[type='number']")) {
+          const fila = event.target.closest("tr");
+          const precioTexto = fila.querySelector("td:nth-child(2)").textContent;
+          const precio = parseInt(precioTexto.replace(/\D/g, ""));
+          const cantidad = parseInt(event.target.value) || 1;
+          const nuevoSubtotal = precio * cantidad;
+
+          fila.querySelector("td:nth-child(4)").textContent = `$${nuevoSubtotal.toLocaleString("es-CL")}`;
+          actualizarTotal();
+        }
+      });
+
+      // Eliminar producto
+      tbody.addEventListener("click", function (event) {
+        if (event.target.classList.contains("btn-outline-danger")) {
+          const fila = event.target.closest("tr");
+          const nombreProducto = fila.querySelector("td:first-child").textContent;
+
+          // Eliminar del DOM
+          fila.remove();
+
+          // Eliminar del localStorage
+          const nuevoCarrito = carrito.filter(p => p.nombre !== nombreProducto);
+          localStorage.setItem("carrito", JSON.stringify(nuevoCarrito));
+
+          actualizarTotal();
+        }
+      });
+
+      function actualizarTotal() {
+        const filas = tbody.querySelectorAll("tr");
+        let total = 0;
+
+        filas.forEach(fila => {
+          const subtotalTexto = fila.querySelector("td:nth-child(4)").textContent;
+          const subtotal = parseInt(subtotalTexto.replace(/\D/g, ""));
+          total += subtotal;
+        });
+
+        const totalCelda = document.querySelector("tfoot td.fw-bold:last-child");
+        totalCelda.textContent = `$${total.toLocaleString("es-CL")}`;
+      }
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabla = document.querySelector("table");
+      const modal = document.getElementById("confirmarPedidoModal");
+
+      modal.addEventListener("show.bs.modal", function (event) {
+        const filasCarrito = tabla.querySelectorAll("tbody tr");
+
+        if (filasCarrito.length === 0) {
+          event.preventDefault();
+          mostrarAlerta("Debe agregar al menos un producto para confirmar pedido");
+          return;
+        }
+
+        // ✅ Actualizar el total en el modal
+        const totalTexto = document.querySelector("tfoot td.fw-bold:last-child").textContent;
+        const totalModal = modal.querySelector(".modal-body ul li:last-child");
+        totalModal.innerHTML = `<strong>Total:</strong> ${totalTexto}`;
+      });
+
+      function mostrarAlerta(mensaje) {
+        const contenedor = document.querySelector(".container-fluid.my-5.px-5");
+        let alerta = contenedor.querySelector(".alert");
+
+        if (alerta) alerta.remove();
+
+        alerta = document.createElement("div");
+        alerta.className = "alert alert-warning mt-3";
+        alerta.textContent = mensaje;
+
+        contenedor.insertBefore(alerta, contenedor.querySelector(".table-responsive"));
+
+        setTimeout(() => alerta.remove(), 4000);
+      }
+    });
+
+  </script>
+
   <script>
     fetch("navbar.html")
       .then(res => res.text())
       .then(data => {
         document.getElementById("navbar").innerHTML = data;
+        actualizarContadorCarrito();
       });
+
+    function actualizarContadorCarrito() {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const totalProductos = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+      const badge = document.querySelector(".navbar .badge.bg-danger");
+      if (badge) {
+        badge.textContent = totalProductos;
+        badge.style.display = totalProductos > 0 ? "inline-block" : "none";
+      }
+    }
   </script>
+
 </body>
 <footer class="bg-black text-white mt-0">
   <div class="container-fluid py-4">

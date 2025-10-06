@@ -155,13 +155,55 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const cliente = JSON.parse(localStorage.getItem("clienteEditado"));
-            if (!cliente) return;
+            if (cliente) {
+                document.getElementById("nombre").value = cliente.nombre;
+                document.getElementById("correo").value = cliente.correo;
+                document.getElementById("telefono").value = cliente.telefono;
+                document.getElementById("direccion").value = cliente.direccion;
+                document.getElementById("comuna").value = cliente.comuna;
+            }
 
-            document.getElementById("nombre").value = cliente.nombre;
-            document.getElementById("correo").value = cliente.correo;
-            document.getElementById("telefono").value = cliente.telefono;
-            document.getElementById("direccion").value = cliente.direccion;
-            document.getElementById("comuna").value = cliente.comuna;
+            // Simulación de correos ya registrados
+            const correosRegistrados = [
+                "juan.perez@correo.cl",
+                "maria.gomez@correo.cl",
+                "cliente@quesoysabor.cl"
+            ];
+
+            const formulario = document.querySelector("form");
+            formulario.addEventListener("submit", function (event) {
+                event.preventDefault(); // Evita envío real
+
+                const correoIngresado = document.getElementById("correo").value.trim().toLowerCase();
+
+                // Si el correo ya existe y no es el del cliente editado
+                const correoDuplicado = correosRegistrados.includes(correoIngresado) &&
+                    (!cliente || cliente.correo.toLowerCase() !== correoIngresado);
+
+                if (correoDuplicado) {
+                    mostrarAlerta("⚠️ El correo ya está en uso. Por favor, ingresa uno diferente.");
+                    return;
+                }
+
+                // Simulación de guardado exitoso
+                console.log("Formulario guardado correctamente");
+                mostrarAlerta("✅ Cliente guardado con éxito", true);
+            });
+
+            function mostrarAlerta(mensaje, exito = false) {
+                const contenedor = document.querySelector(".col-md-8");
+                let alerta = contenedor.querySelector(".alert");
+
+                if (alerta) alerta.remove();
+
+                alerta = document.createElement("div");
+                alerta.className = `alert ${exito ? "alert-success" : "alert-warning"} mt-3`;
+                alerta.textContent = mensaje;
+
+                contenedor.insertBefore(alerta, contenedor.querySelector("form"));
+
+                setTimeout(() => alerta.remove(), 4000);
+            }
         });
     </script>
     <script>
@@ -169,7 +211,19 @@
             .then(res => res.text())
             .then(data => {
                 document.getElementById("navbar").innerHTML = data;
+                actualizarContadorCarrito();
             });
+
+        function actualizarContadorCarrito() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const totalProductos = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+            const badge = document.querySelector(".navbar .badge.bg-danger");
+            if (badge) {
+                badge.textContent = totalProductos;
+                badge.style.display = totalProductos > 0 ? "inline-block" : "none";
+            }
+        }
     </script>
 
 

@@ -46,30 +46,26 @@
           <!-- Filtrar Productos -->
           <div class="mb-5">
             <label class="form-label fw-bold">Filtrar Productos:</label>
-            <button class="btn btn-primary w-100">Filtrar</button>
+            <button class="btn btn-primary w-100" id="btn-filtrar">Filtrar</button>
           </div>
 
           <!-- Categorías -->
-          <div class="mb-5">
-            <label for="categoria" class="form-label fw-bold">Categorías:</label>
-            <select class="form-select" id="categoria">
-              <option>Quesos Italianos</option>
-              <option>Quesos Nacionales</option>
-              <option>Quesos Americanos</option>
-              <option>Quesos Premium</option>
-            </select>
-          </div>
-
+          <select class="form-select" id="filtro-categoria">
+            <option value="Todos">Todos</option>
+            <option value="Quesos Italianos">Quesos Italianos</option>
+            <option value="Quesos Nacionales">Quesos Nacionales</option>
+            <option value="Quesos Americanos">Quesos Americanos</option>
+          </select>
           <!-- Filtrar por precio -->
           <div class="mb-5">
             <label class="form-label fw-bold">Filtrar por precio:</label>
             <div class="input-group mb-2">
               <span class="input-group-text">Desde:</span>
-              <input type="text" class="form-control" placeholder="$5.000" />
+              <input type="text" class="form-control" id="precio-desde" placeholder="$5.000" />
             </div>
             <div class="input-group">
               <span class="input-group-text">Hasta:</span>
-              <input type="text" class="form-control" placeholder="$10.000" />
+              <input type="text" class="form-control" id="precio-hasta" placeholder="$10.000" />
             </div>
           </div>
         </div>
@@ -143,81 +139,88 @@
             </a>
           </div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
-          <!-- Producto 4 -->
-          <div class="col">
-            <a href="producto.html?id=4" class="text-decoration-none text-dark">
-              <div class="card h-100 shadow-sm producto-card">
-                <div class="icono-carrito">
-                  <i class="bi bi-cart-plus"></i>
-                </div>
-                <img src="images/queso-brie.png" class="card-img-top" alt="Queso Brie" />
-                <div class="card-body">
-                  <h5 class="card-title">Queso Brie</h5>
-                  <p class="card-text">
-                    Aromático y sabroso, de textura firme y excelente para
-                    fundir.
-                  </p>
-                </div>
-                <div class="card-footer text-end">
-                  <span class="fw-bold text-success">$6.000</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <!-- Producto 5 -->
-          <div class="col">
-            <a href="producto.html?id=5" class="text-decoration-none text-dark">
-              <div class="card h-100 shadow-sm producto-card">
-                <div class="icono-carrito">
-                  <i class="bi bi-cart-plus"></i>
-                </div>
-                <img src="images/queso-monterey-jack.png" class="card-img-top" alt="Queso Monterey Jack" />
-                <div class="card-body">
-                  <h5 class="card-title">Queso Monterey Jack</h5>
-                  <p class="card-text">
-                    Suave y mantecoso, con sabor delicado. Originario de California,
-                    ideal para fundir.
-                  </p>
-                </div>
-                <div class="card-footer text-end">
-                  <span class="fw-bold text-success">$5.200</span>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <!-- Producto 6 -->
-          <div class="col">
-            <a href="producto.html?id=6" class="text-decoration-none text-dark">
-              <div class="card h-100 shadow-sm producto-card">
-                <div class="icono-carrito">
-                  <i class="bi bi-cart-plus"></i>
-                </div>
-                <img src="images/queso-pecorino-romano.png" class="card-img-top" alt="Queso Pecorino Romano" />
-                <div class="card-body">
-                  <h5 class="card-title">Queso Pecorino Romano</h5>
-                  <p class="card-text">
-                    Firme y salado, elaborado con leche de oveja. Tradicional en la cocina romana.
-                  </p>
-                </div>
-                <div class="card-footer text-end">
-                  <span class="fw-bold text-success">$7.800</span>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   </div>
+  </div>
+  <script src="productos.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".producto-card");
+
+      cards.forEach(card => {
+        const icono = card.querySelector(".icono-carrito");
+
+        icono.addEventListener("click", function (event) {
+          event.preventDefault(); // Evita que se active el enlace del <a>
+
+          const nombre = card.querySelector(".card-title").textContent.trim();
+          const descripcion = card.querySelector(".card-text").textContent.trim();
+          const precioTexto = card.querySelector(".card-footer span").textContent;
+          const precio = parseInt(precioTexto.replace(/\D/g, ""));
+          const imagen = card.querySelector("img").getAttribute("src");
+
+          const productoCarrito = {
+            id: nombre, // Puedes usar un ID real si lo tienes disponible
+            nombre,
+            descripcion,
+            precio,
+            cantidad: 1,
+            subtotal: precio,
+            imagen
+          };
+
+          // Obtener carrito actual
+          const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+          // Verificar si el producto ya está en el carrito
+          const existente = carrito.find(p => p.nombre === productoCarrito.nombre);
+          if (existente) {
+            existente.cantidad += 1;
+            existente.subtotal = existente.precio * existente.cantidad;
+          } else {
+            carrito.push(productoCarrito);
+          }
+
+          // Guardar en localStorage
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+
+          mostrarConfirmacion(`${nombre} agregado al carrito`);
+        });
+      });
+
+      function mostrarConfirmacion(mensaje) {
+        const alerta = document.createElement("div");
+        alerta.className = "alert alert-success position-fixed top-0 end-0 m-3 shadow";
+        alerta.textContent = mensaje;
+        document.body.appendChild(alerta);
+
+        setTimeout(() => alerta.remove(), 3000);
+      }
+    });
+  </script>
+
   <script>
     fetch("navbar.html")
       .then(res => res.text())
       .then(data => {
         document.getElementById("navbar").innerHTML = data;
+        actualizarContadorCarrito();
       });
+
+    function actualizarContadorCarrito() {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const totalProductos = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+      const badge = document.querySelector(".navbar .badge.bg-danger");
+      if (badge) {
+        badge.textContent = totalProductos;
+        badge.style.display = totalProductos > 0 ? "inline-block" : "none";
+      }
+    }
   </script>
+
+
 </body>
 
 <footer class="bg-black text-white mt-0">

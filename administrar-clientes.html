@@ -134,8 +134,21 @@
             .then(res => res.text())
             .then(data => {
                 document.getElementById("navbar").innerHTML = data;
+                actualizarContadorCarrito(); 
             });
+
+        function actualizarContadorCarrito() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const totalProductos = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+            const badge = document.querySelector(".navbar .badge.bg-danger");
+            if (badge) {
+                badge.textContent = totalProductos;
+                badge.style.display = totalProductos > 0 ? "inline-block" : "none";
+            }
+        }
     </script>
+
 
 </body>
 <footer class="bg-black text-white mt-0">

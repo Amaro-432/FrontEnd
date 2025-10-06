@@ -21,6 +21,7 @@
     <h1 id="Titulo">QUESO & SABOR.</h1>
   </div>
   <div id="navbar"></div>
+
   <!-- Breadcrumb -->
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb bg-black p-2">
@@ -80,17 +81,6 @@
             </ul>
           </div>
         </div>
-      </div>
-
-      <!-- Icono decorativo del carrito -->
-      <div class="text-end mt-4">
-        <div class="position-relative d-inline-block">
-          <span style="font-size: 3rem">🛒</span>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            2
-          </span>
-        </div>
-        <p class="mt-2 text-muted">Productos en el carrito</p>
       </div>
     </div>
   </div>
@@ -165,6 +155,62 @@
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".producto-card");
+
+      cards.forEach(card => {
+        const icono = card.querySelector(".icono-carrito");
+
+        icono.addEventListener("click", function (event) {
+          event.preventDefault(); // Evita que se active el enlace del <a>
+
+          const nombre = card.querySelector(".card-title").textContent.trim();
+          const descripcion = card.querySelector(".card-text").textContent.trim();
+          const precioTexto = card.querySelector(".card-footer span").textContent;
+          const precio = parseInt(precioTexto.replace(/\D/g, ""));
+          const imagen = card.querySelector("img").getAttribute("src");
+
+          const productoCarrito = {
+            id: nombre, // Puedes usar un ID real si lo tienes disponible
+            nombre,
+            descripcion,
+            precio,
+            cantidad: 1,
+            subtotal: precio,
+            imagen
+          };
+
+          // Obtener carrito actual
+          const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+          // Verificar si el producto ya está en el carrito
+          const existente = carrito.find(p => p.nombre === productoCarrito.nombre);
+          if (existente) {
+            existente.cantidad += 1;
+            existente.subtotal = existente.precio * existente.cantidad;
+          } else {
+            carrito.push(productoCarrito);
+          }
+
+          // Guardar en localStorage
+          localStorage.setItem("carrito", JSON.stringify(carrito));
+
+          mostrarConfirmacion(`${nombre} agregado al carrito`);
+        });
+      });
+
+      function mostrarConfirmacion(mensaje) {
+        const alerta = document.createElement("div");
+        alerta.className = "alert alert-success position-fixed top-0 end-0 m-3 shadow";
+        alerta.textContent = mensaje;
+        document.body.appendChild(alerta);
+
+        setTimeout(() => alerta.remove(), 3000);
+      }
+    });
+  </script>
+
   <script src="productos.js"></script>
   <script>
     // Obtener ID desde la URL (ejemplo: producto.html?id=1)
@@ -191,11 +237,77 @@
     }
   </script>
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btnAgregar = document.querySelector(".btn.btn-primary");
+      const inputCantidad = document.getElementById("cantidad");
+
+      btnAgregar.addEventListener("click", () => {
+        const cantidad = parseInt(inputCantidad.value);
+        if (isNaN(cantidad) || cantidad < 1) return;
+
+        const productoCarrito = {
+          id: producto.id,
+          nombre: producto.nombre,
+          precio: producto.precio,
+          cantidad: cantidad,
+          subtotal: producto.precio * cantidad,
+          imagen: producto.imagen
+        };
+
+        // Obtener carrito actual
+        const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Verificar si el producto ya está en el carrito
+        const existente = carrito.find(p => p.id === producto.id);
+        if (existente) {
+          existente.cantidad += cantidad;
+          existente.subtotal = existente.precio * existente.cantidad;
+        } else {
+          carrito.push(productoCarrito);
+        }
+
+        // Guardar en localStorage
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        // Mostrar confirmación
+        mostrarConfirmacion(`${producto.nombre} agregado al carrito (${cantidad})`);
+      });
+
+      function mostrarConfirmacion(mensaje) {
+        const contenedor = document.querySelector(".col-md-8");
+        let alerta = contenedor.querySelector(".alert");
+
+        if (alerta) alerta.remove();
+
+        alerta = document.createElement("div");
+        alerta.className = "alert alert-success mt-3";
+        alerta.textContent = mensaje;
+
+        contenedor.insertBefore(alerta, document.querySelector(".container-fluid.my-5"));
+
+        setTimeout(() => alerta.remove(), 3000);
+      }
+    });
+  </script>
+
+  <script>
     fetch("navbar.html")
       .then(res => res.text())
       .then(data => {
         document.getElementById("navbar").innerHTML = data;
+        actualizarContadorCarrito();
       });
+
+    function actualizarContadorCarrito() {
+      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+      const totalProductos = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+      const badge = document.querySelector(".navbar .badge.bg-danger");
+      if (badge) {
+        badge.textContent = totalProductos;
+        badge.style.display = totalProductos > 0 ? "inline-block" : "none";
+      }
+    }
   </script>
 </body>
 <footer class="bg-black text-white mt-0">

@@ -66,7 +66,7 @@
 
             <!-- Contenido principal -->
             <main class="col-md-10 p-0">
-               <section class="p-0">
+                <section class="p-0">
                     <nav aria-label="breadcrumb" class="mb-3 mt-0">
                         <ol class="breadcrumb bg-black p-2">
                             <li class="breadcrumb-item">
@@ -108,13 +108,24 @@
         </div>
     </div>
 
-    <!-- Script para cargar navbar -->
     <script>
         fetch("navbar.html")
             .then(res => res.text())
             .then(data => {
                 document.getElementById("navbar").innerHTML = data;
+                actualizarContadorCarrito();
             });
+
+        function actualizarContadorCarrito() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const totalProductos = carrito.reduce((acc, p) => acc + p.cantidad, 0);
+
+            const badge = document.querySelector(".navbar .badge.bg-danger");
+            if (badge) {
+                badge.textContent = totalProductos;
+                badge.style.display = totalProductos > 0 ? "inline-block" : "none";
+            }
+        }
     </script>
 
     <!-- Script para cargar datos de la orden -->
