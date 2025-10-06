@@ -2,51 +2,198 @@
 <html lang="en">
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segumiento de pedidos</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pedido</title>
+
 </head>
 
 <body>
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Seguimiento del Pedido</h2>
-        <div class="card p-4 shadow-sm">
+    <div class="p-3 bg-secondary text-white text-center d-flex justify-content-center align-items-center gap-2">
+        <image src="images/titulo.png" alt="Logo titulo" style="width: 100px; height: 100px;"></image>
+        <h1 id="Titulo">QUESO & SABOR.</h1>
+    </div>
+    <div id="navbar"></div>
 
-            <h5 class="mb-3">Pedido N°114</h5>
-            <ul class="list-group mb-4">
-                <li class="list-group-item"><strong>Estado Actual:</strong> En camino</li>
-                <li class="list-group-item"><strong>Dirección de entrega:</strong> Av. Providencia 2025</li>
-                <li class="list-group-item"><strong>Tiempo estimado de entrega:</strong> 30 min aprox.</li>
-            </ul>
+    <!-- Layout principal -->
+    <div class="container-fluid">
+        <div class="row">
 
-            <h5 class="mb-3">Progreso del Pedido</h5>
-            <div class="d-flex flex-column gap-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" checked disabled>
-                    <label class="form-check-label">En preparación</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" checked disabled>
-                    <label class="form-check-label">En camino</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" disabled>
-                    <label class="form-check-label">Entregado</label>
-                </div>
-            </div>
+            <!-- Sidebar cliente -->
+            <nav class="col-md-2 bg-dark text-white p-3 d-flex flex-column justify-content-between"
+                style="min-height: 100vh;">
+                <div>
+                    <!-- Encabezado con logo -->
+                    <div class="text-center mb-4">
+                        <img src="images/queso.png" alt="Logo Queso & Sabor" class="rounded-circle mb-2"
+                            style="width: 60px;">
+                        <h5 class="fw-bold">🧀 Queso & Sabor</h5>
+                    </div>
 
-            <div class="text-center mt-4">
-                <span style="font-size: 3rem;"></span>
-                <p class="mt-2 text-muted">Tu pedido está en camino</p>
-            </div>
+                    <!-- Menú de navegación -->
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2" href="website.html">
+                                🏠 <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2"
+                                href="historial-pedidos.html">
+                                📦 <span>Mis pedidos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2" href="mi-perfil.html">
+                                👤 <span>Mi perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cierre de sesión -->
+                <div class="mt-4">
+                    <a class="nav-link text-danger d-flex align-items-center gap-2" href="#" onclick="cerrarSesion()">
+                        🔒 <span>Cerrar sesión</span>
+                    </a>
+                </div>
+            </nav>
+
+
+
+            <!-- Contenido principal -->
+            <main class="col-md-10 p-0">
+                <!-- Breadcrumb, título, tabla, etc. -->
+                <section class="p-0">
+                    <nav aria-label="breadcrumb" class="mb-3 mt-0">
+                        <ol class="breadcrumb bg-black p-2">
+                            <li class="breadcrumb-item">
+                                <a class="text-white" href="website.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="text-white" href="historial-pedidos.html">Mis pedidos</a>
+                            </li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Seguimiento de pedido</li>
+                        </ol>
+                    </nav>
+                </section>
+                <div class="container my-5">
+                    <h2 class="text-center mb-4">🚚 Seguimiento del Pedido</h2>
+                    <div class="card p-4 shadow-sm">
+
+                        <!-- Información del pedido -->
+                        <h5 id="tituloPedido" class="mb-3">📦 Pedido</h5>
+                        <ul id="infoPedido" class="list-group mb-4">
+                            <!-- Datos dinámicos -->
+                        </ul>
+
+                        <!-- Progreso visual -->
+                        <h5 class="mb-3">📍 Progreso del Pedido</h5>
+                        <div id="progresoPedido" class="d-flex flex-column gap-3">
+                            <!-- Progreso dinámico -->
+                        </div>
+
+                        <!-- Icono decorativo -->
+                        <div class="text-center mt-4">
+                            <span style="font-size: 3rem;">🚚</span>
+                            <p id="estadoTexto" class="mt-2 text-muted">Tu pedido está en camino</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const pedidoId = params.get("pedido");
+
+            const pedidos = {
+                "114": {
+                    estado: "En camino",
+                    direccion: "Av. Providencia 2025",
+                    productos: ["Queso de cabra madurado"],
+                    tiempo: "30 min aprox."
+                },
+                "113": {
+                    estado: "Entregado",
+                    direccion: "Calle Lira 303",
+                    productos: ["Queso mantecoso ahumado"],
+                    tiempo: "Entregado"
+                },
+                "112": {
+                    estado: "En preparación",
+                    direccion: "Av. Las Condes 1234",
+                    productos: ["Queso azul artesanal"],
+                    tiempo: "45 min aprox."
+                }
+            };
+
+            if (!pedidoId || !pedidos[pedidoId]) return;
+
+            const pedido = pedidos[pedidoId];
+
+            // Título
+            document.getElementById("tituloPedido").textContent = `📦 Pedido N°${pedidoId}`;
+
+            // Información del pedido
+            document.getElementById("infoPedido").innerHTML = `
+            <li class="list-group-item"><strong>Estado Actual:</strong> ${pedido.estado}</li>
+            <li class="list-group-item"><strong>Dirección de entrega:</strong> ${pedido.direccion}</li>
+            <li class="list-group-item"><strong>Productos:</strong> ${pedido.productos.join(", ")}</li>
+            <li class="list-group-item"><strong>Tiempo estimado de entrega:</strong> ${pedido.tiempo}</li>
+        `;
+
+            // Progreso visual
+            const estados = ["En preparación", "En camino", "Entregado"];
+            const progreso = document.getElementById("progresoPedido");
+            progreso.innerHTML = estados.map(e => `
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" ${e === pedido.estado || estados.indexOf(e) < estados.indexOf(pedido.estado) ? "checked" : ""} disabled>
+                <label class="form-check-label">${e}</label>
+            </div>
+        `).join("");
+
+            // Texto decorativo
+            document.getElementById("estadoTexto").textContent = `Tu pedido está ${pedido.estado.toLowerCase()}`;
+        });
+    </script>
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+            });
+    </script>
+
 
 </body>
 
-</html>
+<footer class="bg-black text-white mt-0">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Información de la empresa -->
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <h5>🧀 Queso & Sabor</h5>
+                <p class="mb-0">© 2025 Todos los derechos reservados.</p>
+            </div>
+
+            <!-- Enlaces rápidos -->
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-white me-3 text-decoration-none">Inicio</a>
+                <a href="#" class="text-white me-3 text-decoration-none">Productos</a>
+                <a href="#" class="text-white me-3 text-decoration-none">Contacto</a>
+                <a href="#" class="text-white text-decoration-none">Despacho</a>
+            </div>
+        </div>
+    </div>
+</footer>

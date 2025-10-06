@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style1.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="p-3 bg-secondary text-white text-center d-flex justify-content-center align-items-center gap-2">
+    <img src="images/titulo.png" alt="Logo titulo" style="width: 100px; height: 100px;">
+    <h1 id="Titulo">QUESO & SABOR.</h1>
+  </div>
+
+  <div id="navbar"></div>
+  <nav aria-label="breadcrumb" class="mb-3 mt-0">
+    <ol class="breadcrumb bg-black p-2">
+      <li class="breadcrumb-item">
+        <a class="text-white" href="#">Home</a>
+      </li>
+
+  </nav>
+
+  <div class="container my-4">
+    <div id="carouselQuesos" class="carousel slide" data-bs-ride="carousel">
+
+      <!-- Indicadores -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselQuesos" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselQuesos" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselQuesos" data-bs-slide-to="2"></button>
+      </div>
+
+      <!-- Slides -->
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <img src="images/queso-brie.png" class="d-block w-100" alt="Queso Mantecoso">
+          <div class="carousel-caption text-start">
+            <h3>Nueva Línea</h3>
+            <p>Queso Brie 100% artesanal.</p>
+            <a href="producto.html?id=4" class="btn btn-warning">Comprar Ahora</a>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <img src="images/recetas.jpg" class="d-block w-100" alt="Recetas">
+          <div class="carousel-caption">
+            <h3>Recetas con Queso</h3>
+            <p>Descubre nuestras recomendaciones y maridajes.</p>
+            <a href="#" class="btn btn-light">Ver Recetas</a>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <img src="images/queso-artesanal.png" class="d-block w-100" alt="Queso Feta">
+          <div class="carousel-caption text-end">
+            <h3>Ofertas Especiales</h3>
+            <p>Aprovecha descuentos en quesos seleccionados.</p>
+            <a href="Catalogo.html" class="btn btn-success">Ver Ofertas</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselQuesos" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselQuesos" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+    </div>
+  </div>
+  <div>
+    <div class="container">
+      <!-- Sección de Productos -->
+
+      <h1 class="mb-4">Destacados:</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
+        <!-- Producto 1 -->
+        <div class="col">
+          <a href="producto.html?id=1" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm producto-card">
+              <div class="icono-carrito">
+                <i class="bi bi-cart-plus"></i>
+              </div>
+              <img src="images/queso-gruyere.png" class="card-img-top" alt="Queso Gruyere" />
+              <div class="card-body">
+                <h5 class="card-title">Queso Gruyere</h5>
+                <p class="card-text">
+                  Aromático y sabroso, de textura firme y excelente para
+                  fundir.
+                </p>
+              </div>
+              <div class="card-footer text-end">
+                <span class="fw-bold text-success">$7.500</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Producto 2 -->
+        <div class="col">
+          <a href="producto.html?id=2" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm producto-card">
+              <div class="icono-carrito">
+                <i class="bi bi-cart-plus"></i>
+              </div>
+              <img src="images/queso-raclette.png" class="card-img-top" alt="Queso Raclette" />
+              <div class="card-body">
+                <h5 class="card-title">Queso Raclette</h5>
+                <p class="card-text">
+                  Aromático y sabroso, de textura firme y excelente para
+                  fundir sobre platos calientes.
+                </p>
+              </div>
+              <div class="card-footer text-end">
+                <span class="fw-bold text-success">$7.500</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Producto 3 -->
+          <div class="col">
+            <a href="producto.html?id=3" class="text-decoration-none text-dark">
+              <div class="card h-100 shadow-sm producto-card">
+                <div class="icono-carrito">
+                  <i class="bi bi-cart-plus"></i>
+                </div>
+                <img src="images/queso-chevre.png" class="card-img-top" alt="Queso Chèvre" />
+                <div class="card-body">
+                  <h5 class="card-title">Queso Chèvre</h5>
+                  <p class="card-text">
+                    Fresco y ligeramente ácido, con textura suave y sabor característico.
+                     Tradicional en la gastronomía francesa.
+                  </p>
+                </div>
+                <div class="card-footer text-end">
+                  <span class="fw-bold text-success">$5.800</span>
+                </div>
+              </div>
+            </a>
+          </div>
+      </div>
+      <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
+        <!-- Producto 4 -->
+        <div class="col">
+          <a href="producto.html?id=4" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm producto-card">
+              <div class="icono-carrito">
+                <i class="bi bi-cart-plus"></i>
+              </div>
+              <img src="images/queso-brie.png" class="card-img-top" alt="Queso Brie" />
+              <div class="card-body">
+                <h5 class="card-title">Queso Brie</h5>
+                <p class="card-text">
+                  Aromático y sabroso, de textura firme y excelente para
+                  fundir.
+                </p>
+              </div>
+              <div class="card-footer text-end">
+                <span class="fw-bold text-success">$6.000</span>
+              </div>
+            </div>
+          </a>
+        </div>
+        <!-- Producto 5 -->
+        <div class="col">
+          <a href="producto.html?id=5" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm producto-card">
+              <div class="icono-carrito">
+                <i class="bi bi-cart-plus"></i>
+              </div>
+              <img src="images/queso-monterey-jack.png" class="card-img-top" alt="Queso Monterey Jack" />
+              <div class="card-body">
+                <h5 class="card-title">Queso Monterey Jack</h5>
+                <p class="card-text">
+                  Suave y mantecoso, con sabor delicado. Originario de California,
+                  ideal para fundir.
+                </p>
+              </div>
+              <div class="card-footer text-end">
+                <span class="fw-bold text-success">$5.200</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Producto 6 -->
+        <div class="col">
+          <a href="producto.html?id=6" class="text-decoration-none text-dark">
+            <div class="card h-100 shadow-sm producto-card">
+              <div class="icono-carrito">
+                <i class="bi bi-cart-plus"></i>
+              </div>
+              <img src="images/queso-pecorino-romano.png" class="card-img-top" alt="Queso Pecorino Romano" />
+              <div class="card-body">
+                <h5 class="card-title">Queso Pecorino Romano</h5>
+                <p class="card-text">
+                  Firme y salado, elaborado con leche de oveja. Tradicional en la cocina romana.
+                </p>
+              </div>
+              <div class="card-footer text-end">
+                <span class="fw-bold text-success">$7.800</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <div
+          class="col-12 col-sm-6 col-md-6 col-lg-6 text-center d-flex justify-content-center align-items-center gap-2">
+          <div class="mt-2 p-5 jumbotron-bg text-white rounded">
+
+            <image src="images/queso-icono.png" alt="Logo titulo" style="width: 100px; height: 100px;"></image>
+            <div class="text-box p-4 rounded">
+              <h1>Quesos Artesanales</h1>
+              <p>Nuestros quesos artesanales son el reflejo de una tradición que honra el sabor, la calidad y el trabajo
+                bien hecho. Cada pieza es elaborada con dedicación,
+                utilizando métodos que respetan los tiempos naturales de maduración. Desde los clásicos hasta las
+                creaciones más audaces,
+                ofrecemos una variedad que celebra la diversidad de texturas, aromas y perfiles que solo el queso
+                artesanal puede entregar. Es más que un alimento: es una expresión de pasión y autenticidad en
+                cada bocado.</p>
+
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-sm-6 col-md-6 col-lg-6 text-center d-flex justify-content-center align-items-center gap-2">
+          <div class="mt-2 p-5 jumbotron1-bg text-white rounded">
+
+            <image src="images/leche-icono.png" alt="Logo titulo" style="width: 100px; height: 100px;"></image>
+            <div class="text-box p-4 rounded">
+              <h1>El Arte del Queso Artesanal</h1>
+              <p>Cada queso que ofrecemos es una expresión de tradición y dedicación, elaborado con técnicas que
+                respetan
+                el tiempo, el origen y la calidad de sus ingredientes.
+                Nuestra selección reúne sabores únicos, desde los más suaves y cremosos hasta los intensos y curados,
+                todos creados por manos expertas que entienden el valor de lo auténtico.
+                Más que productos, son experiencias que conectan con la tierra, la historia y el gusto por lo bien
+                hecho.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+  </script>
+
+</body>
+<footer class="bg-black text-white mt-0">
+  <div class="container-fluid py-4">
+    <div class="row">
+      <!-- Información de la empresa -->
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <h5>🧀 Queso & Sabor</h5>
+        <p class="mb-0">© 2025 Todos los derechos reservados.</p>
+      </div>
+
+      <!-- Enlaces rápidos -->
+      <div class="col-md-6 text-center text-md-end">
+        <a href="#" class="text-white me-3 text-decoration-none">Inicio</a>
+        <a href="#" class="text-white me-3 text-decoration-none">Productos</a>
+        <a href="#" class="text-white me-3 text-decoration-none">Contacto</a>
+        <a href="#" class="text-white text-decoration-none">Despacho</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</html>

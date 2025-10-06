@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="p-3 bg-secondary text-white text-center d-flex justify-content-center align-items-center gap-2">
+        <image src="images/titulo.png" alt="Logo titulo" style="width: 100px; height: 100px;"></image>
+        <h1 id="Titulo">QUESO & SABOR.</h1>
+    </div>
+    <div id="navbar"></div>
+
+    <!-- Layout principal -->
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar cliente -->
+            <nav class="col-md-2 bg-dark text-white p-3 d-flex flex-column justify-content-between"
+                style="min-height: 100vh;">
+                <div>
+                    <!-- Encabezado con logo -->
+                    <div class="text-center mb-4">
+                        <img src="images/queso.png" alt="Logo Queso & Sabor" class="rounded-circle mb-2"
+                            style="width: 60px;">
+                        <h5 class="fw-bold">🧀 Queso & Sabor</h5>
+                    </div>
+
+                    <!-- Menú de navegación -->
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2" href="website.html">
+                                🏠 <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2"
+                                href="historial-pedidos.html">
+                                📦 <span>Mis pedidos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2" href="mi-perfil.html">
+                                👤 <span>Mi perfil</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cierre de sesión -->
+                <div class="mt-4">
+                    <a class="nav-link text-danger d-flex align-items-center gap-2" href="#" onclick="cerrarSesion()">
+                        🔒 <span>Cerrar sesión</span>
+                    </a>
+                </div>
+            </nav>
+
+
+            <!-- Contenido principal -->
+            <main class="col-md-10 p-0">
+                <!-- Breadcrumb, título, tabla, etc. -->
+                <section class="p-0">
+                    <nav aria-label="breadcrumb" class="mb-3 mt-0">
+                        <ol class="breadcrumb bg-black p-2">
+                            <li class="breadcrumb-item">
+                                <a class="text-white" href="website.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Mi perfil</li>
+                        </ol>
+                    </nav>
+
+
+                </section>
+                <div class="container my-5">
+                    <h2 class="text-center mb-4">👤 Modificar Perfil</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <form class="card p-4 shadow-sm">
+                                <h5 class="mb-3 d-flex justify-content-between align-items-center">
+                                    Mi Perfil
+                                    <a href="nuevo-correo.html" class="btn btn-outline-secondary btn-sm">✉️ Cambiar
+                                        correo</a>
+                                </h5>
+
+                                <!-- Nombre -->
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre completo:</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Ej: Pedro Ramírez"
+                                        required>
+                                </div>
+
+                                <!-- Teléfono -->
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Teléfono:</label>
+                                    <input type="tel" class="form-control" id="telefono"
+                                        placeholder="Ej: +56 9 12345678" required>
+                                </div>
+
+                                <!-- Dirección -->
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección:</label>
+                                    <input type="text" class="form-control" id="direccion"
+                                        placeholder="Ej: Av. Apoquindo 3400" required>
+                                </div>
+
+                                <!-- Comuna -->
+                                <div class="mb-3">
+                                    <label for="comuna" class="form-label">Comuna:</label>
+                                    <select class="form-select" id="comuna" required>
+                                        <option selected disabled>Selecciona tu comuna</option>
+                                        <option>Las Condes</option>
+                                        <option>Providencia</option>
+                                        <option>Ñuñoa</option>
+                                        <option>Maipú</option>
+                                        <option>Puente Alto</option>
+                                    </select>
+                                </div>
+
+                                <!-- Botones -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+            });
+    </script>
+</body>
+<footer class="bg-black text-white mt-0">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Información de la empresa -->
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <h5>🧀 Queso & Sabor</h5>
+                <p class="mb-0">© 2025 Todos los derechos reservados.</p>
+            </div>
+
+            <!-- Enlaces rápidos -->
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-white me-3 text-decoration-none">Inicio</a>
+                <a href="#" class="text-white me-3 text-decoration-none">Productos</a>
+                <a href="#" class="text-white me-3 text-decoration-none">Contacto</a>
+                <a href="#" class="text-white text-decoration-none">Despacho</a>
+            </div>
+        </div>
+    </div>
+</footer>

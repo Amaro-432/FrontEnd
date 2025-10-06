@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de cliente</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="p-3 bg-secondary text-white text-center d-flex justify-content-center align-items-center gap-2">
+        <image src="images/titulo.png" alt="Logo titulo" style="width: 100px; height: 100px;"></image>
+        <h1 id="Titulo">QUESO & SABOR.</h1>
+    </div>
+    <div id="navbar"></div>
+
+    <!-- Layout principal -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+
+            <nav class="col-md-2 bg-dark text-white p-3 d-flex flex-column justify-content-between"
+                style="min-height: 90vh;">
+                <div>
+                    <!-- Logo y título -->
+                    <div class="text-center mb-4">
+                        <img src="images/queso.png" alt="Logo Queso & Sabor" class="rounded-circle mb-2"
+                            style="width: 60px;">
+                        <h4 class="fw-bold">🧀 Queso & Sabor</h4>
+                    </div>
+
+                    <!-- Menú principal -->
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2"
+                                href="Administrar-pedidos.html">
+                                📦 <span>Pedidos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2"
+                                href="disponibilidad-productos.html">
+                                🧀 <span>Productos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2"
+                                href="administrar-clientes.html">
+                                👥 <span>Clientes</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2"
+                                href="administrar-roles.html">
+                                🧑‍💼 <span>Roles</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a class="nav-link text-white d-flex align-items-center gap-2" href="reporte-ventas.html">
+                                📊 <span>Reportes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cierre de sesión -->
+                <div class="mt-4">
+                    <a class="nav-link text-danger d-flex align-items-center gap-2" href="#" onclick="cerrarSesion()">
+                        🔒 <span>Cerrar sesión</span>
+                    </a>
+                </div>
+            </nav>
+
+
+            <!-- Contenido principal -->
+            <main class="col-md-10 p-0">
+                <!-- Breadcrumb, título, tabla, etc. -->
+                <section class="p-0">
+                    <nav aria-label="breadcrumb" class="mb-3 mt-0">
+                        <ol class="breadcrumb bg-black p-2">
+                            <li class="breadcrumb-item">
+                                <a class="text-white" href="website.html">Home</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="text-white" href="Administrar-pedidos.html">Área de administración</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a class="text-white" href="administrar-clientes.html">Lista de clientes</a>
+                            </li>
+                            <li class="breadcrumb-item active text-white" aria-current="page">Formulario de cliente</li>
+                        </ol>
+                    </nav>
+                </section>
+                <div class="container-fluid my-5">
+                    <h2 class="text-center mb-4">👥 Formulario de Cliente</h2>
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <form class="card p-4 shadow-sm">
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Ej: Juan Pérez"
+                                        required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo electrónico:</label>
+                                    <input type="email" class="form-control" id="correo"
+                                        placeholder="Ej: juan@example.com" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="telefono" class="form-label">Teléfono:</label>
+                                    <input type="tel" class="form-control" id="telefono"
+                                        placeholder="Ej: +56 9 1234 5678" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección:</label>
+                                    <input type="text" class="form-control" id="direccion"
+                                        placeholder="Ej: Av. Las Condes 1234" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="comuna" class="form-label">Comuna:</label>
+                                    <select class="form-select" id="comuna" required>
+                                        <option selected disabled>Selecciona una comuna</option>
+                                        <option>Maipú</option>
+                                        <option>Providencia</option>
+                                        <option>Las Condes</option>
+                                        <option>Ñuñoa</option>
+                                        <option>Puente Alto</option>
+                                    </select>
+                                </div>
+
+                                <!-- Botones de acción -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="reset" class="btn btn-outline-danger">Cancelar</button>
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+            </main>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cliente = JSON.parse(localStorage.getItem("clienteEditado"));
+            if (!cliente) return;
+
+            document.getElementById("nombre").value = cliente.nombre;
+            document.getElementById("correo").value = cliente.correo;
+            document.getElementById("telefono").value = cliente.telefono;
+            document.getElementById("direccion").value = cliente.direccion;
+            document.getElementById("comuna").value = cliente.comuna;
+        });
+    </script>
+    <script>
+        fetch("navbar.html")
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("navbar").innerHTML = data;
+            });
+    </script>
+
+
+</body>
+<footer class="bg-black text-white mt-0">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <!-- Información de la empresa -->
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <h5>🧀 Queso & Sabor</h5>
+                <p class="mb-0">© 2025 Todos los derechos reservados.</p>
+            </div>
+
+            <!-- Enlaces rápidos -->
+            <div class="col-md-6 text-center text-md-end">
+                <a href="#" class="text-white me-3 text-decoration-none">Inicio</a>
+                <a href="#" class="text-white me-3 text-decoration-none">Productos</a>
+                <a href="#" class="text-white me-3 text-decoration-none">Contacto</a>
+                <a href="#" class="text-white text-decoration-none">Despacho</a>
+            </div>
+        </div>
+    </div>
+</footer>

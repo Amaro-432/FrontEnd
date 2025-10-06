@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="website.html">
+                <img src="images/queso.png" alt="Avatar Logo" style="width:40px;" class="rounded-pill">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="website.html">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="Catalogo.html">QUESOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">CONTACTO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">DESPACHO</a>
+                    </li>
+                </ul>
+
+                <!-- Botón Carrito -->
+                <a href="carrito-de-compras.html" class="btn btn-light me-3 position-relative">
+                    <img src="images/cart.png" alt="Logo usuario" style="width:40px;" class="rounded-pill">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        2 <!-- número de productos -->
+                    </span>
+                </a>
+
+                <!-- Dropdown de usuario -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownUser"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="images/img_user.png" alt="Logo usuario" style="width:40px;" class="rounded-pill">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                        <li><a class="dropdown-item" href="login.html">Identificarse</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="Mi-perfil.html">Cuenta</a></li>
+                        <li><a class="dropdown-item" href="Administrar-pedidos.html">Área de Administración</a></li>
+                        <li><a class="dropdown-item" href="ordenes-despacho.html">Área de despachos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Buscador -->
+                <form class="d-flex">
+                    <input class="form-control me-2" type="text" placeholder="Buscar">
+                    <button class="btn btn-secondary" type="button">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</body>

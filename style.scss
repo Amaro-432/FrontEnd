@@ -1,0 +1,8 @@
+// Sobrescribes variables de Bootstrap
+$primary: #F5C542;
+$secondary: #5D4037;
+$light: #FFFBEA;
+$dark: #333333;
+
+// Importa Bootstrap con tus variables personalizadas
+@import "node_modules/bootstrap/scss/bootstrap";

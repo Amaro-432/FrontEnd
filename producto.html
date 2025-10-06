@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Producto</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style1.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="p-3 bg-secondary text-white text-center d-flex justify-content-center align-items-center gap-2">
+    <image src="images/titulo.png" alt="Logo titulo" style="width: 100px; height: 100px"></image>
+    <h1 id="Titulo">QUESO & SABOR.</h1>
+  </div>
+  <div id="navbar"></div>
+  <!-- Breadcrumb -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb bg-black p-2">
+      <li class="breadcrumb-item">
+        <a class="text-white" href="#">Home</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a class="text-white" href="#">Productos</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a class="text-white" href="#">Quesos</a>
+      </li>
+      <li class="breadcrumb-item active text-white" aria-current="page">
+        Quesos Suizos
+      </li>
+    </ol>
+  </nav>
+
+  <div class="container-fluid my-5 px-5" style="min-height: 60vh">
+    <div class="card p-4 shadow-sm">
+      <div class="row g-4 align-items-center">
+        <!-- Imagen del producto -->
+        <div class="col-md-4 text-center">
+          <img id="imagen" src="images/queso-placeholder.png" alt="Queso Gruyere" class="img-fluid rounded shadow-sm" />
+
+        </div>
+
+        <!-- Información del producto -->
+        <div class="col-md-8">
+          <h4 class="mb-2" id="nombre"></h4>
+          <p class="text-muted" id="descripcion"></p>
+          <p class="fs-5 fw-bold">Precio: $<span id="precio"></span></p>
+
+          <!-- Selector de cantidad -->
+          <div class="mb-3">
+            <label for="cantidad" class="form-label">Cantidad:</label>
+            <input type="number" class="form-control w-25" id="cantidad" value="1" min="1" />
+          </div>
+
+          <!-- Botón de acción -->
+          <button class="btn btn-primary">🛒 Agregar al Carrito</button>
+          <div class="container-fluid my-5">
+            <h5>Detalles del producto</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                Origen: <span id="origen"></span>
+              </li>
+              <li class="list-group-item">
+                Tipo de leche: <span id="leche"></span>
+              </li>
+              <li class="list-group-item">
+                Maduración: <span id="maduracion"></span>
+              </li>
+              <li class="list-group-item">
+                Ideal para: <span id="ideal"></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Icono decorativo del carrito -->
+      <div class="text-end mt-4">
+        <div class="position-relative d-inline-block">
+          <span style="font-size: 3rem">🛒</span>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            2
+          </span>
+        </div>
+        <p class="mt-2 text-muted">Productos en el carrito</p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <!-- Sección de Productos -->
+
+    <h2 class="mb-4 text-center">🧀 Te puede interesar:</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 p-2">
+      <!-- Producto 1 -->
+      <div class="col">
+        <a href="producto.html?id=1" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm producto-card">
+            <div class="icono-carrito">
+              <i class="bi bi-cart-plus"></i>
+            </div>
+            <img src="images/queso-gruyere.png" class="card-img-top" alt="Queso Gruyere" />
+            <div class="card-body">
+              <h5 class="card-title">Queso Gruyere</h5>
+              <p class="card-text">
+                Aromático y sabroso, de textura firme y excelente para
+                fundir.
+              </p>
+            </div>
+            <div class="card-footer text-end">
+              <span class="fw-bold text-success">$7.500</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <!-- Producto 2 -->
+      <div class="col">
+        <a href="producto.html?id=2" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm producto-card">
+            <div class="icono-carrito">
+              <i class="bi bi-cart-plus"></i>
+            </div>
+            <img src="images/queso-raclette.png" class="card-img-top" alt="Queso Raclette" />
+            <div class="card-body">
+              <h5 class="card-title">Queso Raclette</h5>
+              <p class="card-text">
+                Aromático y sabroso, de textura firme y excelente para
+                fundir sobre platos calientes.
+              </p>
+            </div>
+            <div class="card-footer text-end">
+              <span class="fw-bold text-success">$7.500</span>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="col">
+        <a href="producto.html?id=3" class="text-decoration-none text-dark">
+          <div class="card h-100 shadow-sm producto-card">
+            <div class="icono-carrito">
+              <i class="bi bi-cart-plus"></i>
+            </div>
+            <img src="images/queso-chevre.png" class="card-img-top" alt="Queso Chèvre" />
+            <div class="card-body">
+              <h5 class="card-title">Queso Chèvre</h5>
+              <p class="card-text">
+                Fresco y ligeramente ácido, con textura suave y sabor característico.
+                Tradicional en la gastronomía francesa.
+              </p>
+            </div>
+            <div class="card-footer text-end">
+              <span class="fw-bold text-success">$5.800</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <script src="productos.js"></script>
+  <script>
+    // Obtener ID desde la URL (ejemplo: producto.html?id=1)
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get("id"));
+
+    // Buscar producto en la lista
+    const producto = productos.find((p) => p.id === id);
+
+    if (producto) {
+      document.getElementById("nombre").textContent = producto.nombre;
+      document.getElementById("descripcion").textContent =
+        producto.descripcion;
+      document.getElementById("precio").textContent = producto.precio;
+      document.getElementById("origen").textContent = producto.origen;
+      document.getElementById("leche").textContent = producto.leche;
+      document.getElementById("maduracion").textContent = producto.maduracion;
+      document.getElementById("ideal").textContent = producto.ideal;
+      document.getElementById("imagen").src = producto.imagen;
+      document.getElementById("imagen").alt = producto.nombre;
+    } else {
+      document.querySelector(".container-fluid").innerHTML =
+        "<h3>Producto no encontrado</h3>";
+    }
+  </script>
+  <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+  </script>
+</body>
+<footer class="bg-black text-white mt-0">
+  <div class="container-fluid py-4">
+    <div class="row">
+      <!-- Información de la empresa -->
+      <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+        <h5>🧀 Queso & Sabor</h5>
+        <p class="mb-0">© 2025 Todos los derechos reservados.</p>
+      </div>
+
+      <!-- Enlaces rápidos -->
+      <div class="col-md-6 text-center text-md-end">
+        <a href="#" class="text-white me-3 text-decoration-none">Inicio</a>
+        <a href="#" class="text-white me-3 text-decoration-none">Productos</a>
+        <a href="#" class="text-white me-3 text-decoration-none">Contacto</a>
+        <a href="#" class="text-white text-decoration-none">Despacho</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</html>
